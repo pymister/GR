@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 import logging
-logger = logging.getLogger('guorou')
+logger = logging.getLogger('django')
 
 
 def custom_exception_hander(exc,context):

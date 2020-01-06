@@ -24,7 +24,7 @@ SECRET_KEY = 'mj9=%!%&zcnvjf(y*v&d9ur8__3j!21elra9g)^$h^8ui(ep(_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['api.guorou.cn']
 
 # Application definition
 
@@ -35,9 +35,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -46,6 +48,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# CORS组的配置信息
+CORS_ORIGIN_WHITELIST = (
+    'http://www.guorou.cn:8080',
+)
+CORS_ALLOW_CREDENTIALS = False  # 允许ajax跨域请求时携带cookie
 
 ROOT_URLCONF = 'guorou.urls'
 
@@ -147,7 +155,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(os.path.dirname(BASE_DIR), "logs/luffy.log"),
+            'filename': os.path.join(os.path.dirname(BASE_DIR), "logs/guorou.log"),
             'maxBytes': 300 * 1024 * 1024,
             'backupCount': 10,
             'formatter': 'verbose'
